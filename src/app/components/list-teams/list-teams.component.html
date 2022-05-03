@@ -1,0 +1,28 @@
+<ng-container *ngIf="teams && titulo">
+    <div class="d-flex flex-column bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+            <h1 class="text-center">{{titulo}}</h1>
+        </div>
+        <div class="p-2 bd-highlight">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let team of teams; let i=index" (opened)="abrirCerrarEquipo(team.id)"
+                    (closed)="abrirCerrarEquipo(team.id)" (closed)="estadoPanel = false">
+                    <mat-expansion-panel-header>
+                        <div class="d-flex justify-content-center">
+                            <div class="p-2 bd-highlight">
+                                <mat-panel-title>
+                                    {{team.name}}
+                                </mat-panel-title>
+                            </div>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <ng-container *ngIf="team.open">
+                        <div class="mat-expansion-panel-content">
+                            <app-list-players [idEquipo]="team.id"></app-list-players>
+                        </div>
+                    </ng-container>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</ng-container>
